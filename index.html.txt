@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eddie & Emily | Wedding Invitation</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#F7F4EF',
+                        block: '#E8E1D9',
+                        primary: '#8da399',
+                        btn: '#9C8CA5',
+                        btnHover: '#887590',
+                        txt: '#5F5A55'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', '"Noto Serif TC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
+            background-color: #F7F4EF;
+            color: #5F5A55;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background: rgba(247, 244, 239, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(141, 163, 153, 0.15);
+        }
+
+        /* Glowing Countdown Card */
+        .glowing-card {
+            background: #ffffff;
+            box-shadow: 0 4px 25px rgba(141, 163, 153, 0.2);
+            border-radius: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+        .glowing-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Accordion Animations */
+        .accordion-content {
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* Input styling overrides */
+        input[type="text"], input[type="email"], input[type="number"], select, textarea {
+            background-color: #F7F4EF;
+            border: 1px solid rgba(141, 163, 153, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #8da399;
+        }
+        
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl tracking-widest text-primary font-semibold">E & E</a>
+            <div class="space-x-6 text-sm tracking-widest">
+                <a href="#home" class="hover:text-primary transition-colors">關於我們 ABOUT</a>
+                <a href="#details" class="hover:text-primary transition-colors">婚禮詳情 DETAILS</a>
+                <a href="#rsvp" class="hover:text-primary transition-colors">出席回函 RSVP</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://i.postimg.cc/nhcYKG91/1T6A1242.jpg" alt="Eddie and Emily" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/1200x800/8da399/ffffff?text=Eddie+%26+Emily';" />
+            <div class="absolute inset-0 bg-black/25"></div>
+        </div>
+        <div class="relative z-10 text-center text-white mt-16 px-4">
+            <h1 class="text-6xl md:text-8xl font-semibold tracking-wider mb-6 drop-shadow-lg">Eddie & Emily</h1>
+            <p class="text-2xl md:text-3xl italic mb-10 drop-shadow-md font-light">You Are My Greatest Adventure</p>
+            <p class="text-xl tracking-[0.3em] uppercase drop-shadow-md border-t border-white/50 pt-6 inline-block">January 16, 2027</p>
+        </div>
+        
+        <a href="#countdown" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </a>
+    </header>
+
+    <section id="countdown" class="py-24 bg-base relative">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-sm tracking-[0.4em] text-primary mb-12 uppercase">Countdown to our forever</h2>
+            
+            <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+                <div class="glowing-card px-6 py-5 flex items-center gap-5 min-w-[140px] justify-center">
+                    <span id="timer-days" class="text-5xl text-primary font-semibold w-12 text-center">00</span>
+                    <div class="w-px h-12 bg-primary/20"></div>
+                    <span class="text-xs text-txt/70 tracking-[0.2em] uppercase flex flex-col justify-center">DAYS</span>
+                </div>
+                
+                <div class="glowing-card px-6 py-5 flex items-center gap-5 min-w-[140px] justify-center">
+                    <span id="timer-hours" class="text-5xl text-primary font-semibold w-12 text-center">00</span>
+                    <div class="w-px h-12 bg-primary/20"></div>
+                    <span class="text-xs text-txt/70 tracking-[0.2em] uppercase">HRS</span>
+                </div>
+                
+                <div class="glowing-card px-6 py-5 flex items-center gap-5 min-w-[140px] justify-center">
+                    <span id="timer-mins" class="text-5xl text-primary font-semibold w-12 text-center">00</span>
+                    <div class="w-px h-12 bg-primary/20"></div>
+                    <span class="text-xs text-txt/70 tracking-[0.2em] uppercase">MINS</span>
+                </div>
+                
+                <div class="glowing-card px-6 py-5 flex items-center gap-5 min-w-[140px] justify-center">
+                    <span id="timer-secs" class="text-5xl text-primary font-semibold w-12 text-center">00</span>
+                    <div class="w-px h-12 bg-primary/20"></div>
+                    <span class="text-xs text-txt/70 tracking-[0.2em] uppercase">SECS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details" class="py-24 bg-block relative">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="bg-base rounded-2xl shadow-sm border border-primary/20 p-10 md:p-14 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-16 h-16 border-t border-l border-primary/30 rounded-tl-2xl"></div>
+                <div class="absolute bottom-0 right-0 w-16 h-16 border-b border-r border-primary/30 rounded-br-2xl"></div>
+
+                <div class="text-center">
+                    <h2 class="text-3xl text-primary mb-10 tracking-widest font-semibold">Wedding Details</h2>
+                    
+                    <div class="space-y-8 text-lg">
+                        <div>
+                            <p class="text-xs text-txt/60 tracking-[0.3em] uppercase mb-2">When</p>
+                            <p class="tracking-wide">2027 . 01 . 16 (六)</p>
+                            <p class="tracking-wide mt-1">16:50 證婚儀式 <span class="mx-2 text-primary/50">|</span> 17:30 晚宴入席</p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-xs text-txt/60 tracking-[0.3em] uppercase mb-2">Where</p>
+                            <p class="tracking-wider">
+                                <span class="whitespace-nowrap font-medium">台北萬豪酒店</span> 
+                                <span class="whitespace-nowrap">8F Garden Villa</span>
+                            </p>
+                            <p class="text-sm mt-2 text-txt/80">台北市中山區樂群二路199號</p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-xs text-txt/60 tracking-[0.3em] uppercase mb-3">Dress Code</p>
+                            <div class="flex flex-wrap items-center justify-center gap-6 mt-2">
+                                <span class="flex items-center gap-2 text-base text-txt">
+                                    <span class="w-4 h-4 rounded-full shadow-inner bg-[#7a95a2]"></span> 霧藍
+                                </span>
+                                <span class="flex items-center gap-2 text-base text-txt">
+                                    <span class="w-4 h-4 rounded-full shadow-inner bg-[#d7c4b4]"></span> 燕麥奶茶
+                                </span>
+                                <span class="flex items-center gap-2 text-base text-txt">
+                                    <span class="w-4 h-4 rounded-full shadow-inner bg-[#9f4f36]"></span> 焦糖磚紅
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 border-t border-primary/20 pt-8">
+                    <div class="border-b border-primary/20">
+                        <button class="accordion-btn w-full py-4 flex justify-between items-center text-left text-primary focus:outline-none">
+                            <span class="tracking-widest">大眾運輸 TRANSPORTATION</span>
+                            <span class="icon text-xl transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="pb-6 text-txt/80 text-base leading-relaxed tracking-wide">
+                                搭乘捷運文湖線至 <span class="whitespace-nowrap font-semibold text-txt">捷運劍南路站</span>，自 3 號出口出站，步行約 5-8 分鐘即可抵達 <span class="whitespace-nowrap font-semibold text-txt">台北萬豪酒店</span>。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-primary/20">
+                        <button class="accordion-btn w-full py-4 flex justify-between items-center text-left text-primary focus:outline-none">
+                            <span class="tracking-widest">自行開車 PARKING</span>
+                            <span class="icon text-xl transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="pb-6 text-txt/80 text-base leading-relaxed tracking-wide">
+                                <span class="whitespace-nowrap font-semibold text-txt">台北萬豪酒店</span> 備有地下停車場。賓客可享免費停車優惠，請於宴會結束後向招待人員領取折抵券。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-24 bg-base">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl text-primary mb-4 tracking-widest font-semibold">RSVP</h2>
+                <p class="text-txt/70 tracking-wide">期待與您分享我們的喜悅</p>
+            </div>
+
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showSuccessMessage(); }"></iframe>
+
+            <form id="rsvp_form" action="https://docs.google.com/forms/d/e/1FAIpQLScxNIdVkIrzSF5JjFaRlwWhaCJN7-eWYHe7qOxqZbQOHIZKEw/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">姓名 NAME</label>
+                        <input type="text" name="entry.90419048" required placeholder="請填寫本名">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">電子郵件 EMAIL</label>
+                        <input type="email" name="entry.1563631656" required placeholder="example@mail.com">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">關係 RELATIONSHIP</label>
+                        <select name="entry.433537772" required>
+                            <option value="" disabled selected>請選擇關係</option>
+                            <option value="男方親人">男方親人</option>
+                            <option value="女方親人">女方親人</option>
+                            <option value="男方友人">男方友人</option>
+                            <option value="女方友人">女方友人</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">是否參加證婚儀式 CEREMONY</label>
+                        <select name="entry.999999999" required>
+                            <option value="" disabled selected>請選擇是否參加</option>
+                            <option value="是，準時觀禮">是，準時觀禮 (17:00)</option>
+                            <option value="否，僅參加晚宴">否，僅參加晚宴</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">參加晚宴人數 DINNER ADULTS</label>
+                        <input type="number" id="dinner_count" name="entry.1699302037" min="0" placeholder="0" required oninput="toggleDynamicFields()">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">兒童人數 CHILDREN</label>
+                        <input type="number" name="entry.1272003234" min="0" placeholder="0">
+                    </div>
+                </div>
+
+                <div id="dynamic_fields" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden transition-all duration-300">
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">飲食需求 DIETARY</label>
+                        <select id="dietary_select" name="entry.1681969812">
+                            <option value="" disabled selected>請選擇飲食需求</option>
+                            <option value="葷食">葷食</option>
+                            <option value="素食">素食</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">兒童椅需求 BABY CHAIR</label>
+                        <select id="chair_select" name="entry.386014389">
+                            <option value="" disabled selected>請選擇需求</option>
+                            <option value="不需要">不需要</option>
+                            <option value="需要">需要</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs text-txt tracking-widest mb-2">是否需要紙本喜帖 PAPER INVITATION</label>
+                        <select id="paper_invite_select" name="entry.888888888" required onchange="toggleAddressField()">
+                            <option value="" disabled selected>請選擇喜帖需求</option>
+                            <option value="不需要，電子喜帖即可">不需要，電子喜帖即可</option>
+                            <option value="需要，請郵寄紙本喜帖">需要，請郵寄紙本喜帖</option>
+                        </select>
+                    </div>
+                    
+                    <div id="address_field" class="hidden transition-all duration-300">
+                        <label class="block text-xs text-txt tracking-widest mb-2">收件地址與收件人 MAILING ADDRESS</label>
+                        <input type="text" id="address_input" name="entry.777777777" placeholder="請填寫收件地址、郵遞區號及收件人姓名">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-txt tracking-widest mb-2">想對我們說的話 MESSAGE</label>
+                    <textarea name="entry.2112536392" rows="4" placeholder="寫下您的祝福..."></textarea>
+                </div>
+
+                <div class="text-center pt-4">
+                    <button type="submit" class="bg-btn hover:bg-btnHover text-white tracking-widest px-12 py-4 rounded-lg transition-colors duration-300 shadow-md w-full md:w-auto">
+                        送出回函 SUBMIT
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="success_modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity">
+        <div class="bg-base p-10 rounded-2xl shadow-2xl text-center max-w-sm mx-4 transform transition-all scale-95 border border-primary/20" id="modal_content">
+            <h3 class="text-3xl text-primary mb-4 font-semibold tracking-widest">Thank You!</h3>
+            <p class="mb-8 text-txt/80 tracking-wide leading-relaxed">我們已收到您的回覆，<br>期待與您分享這份喜悅！</p>
+            <button onclick="closeModal()" class="px-8 py-3 bg-btn hover:bg-btnHover text-white rounded-lg transition-colors tracking-widest w-full">
+                關閉 CLOSE
+            </button>
+        </div>
+    </div>
+
+    <footer class="py-10 bg-block text-center border-t border-primary/20">
+        <p class="text-sm text-txt/60 tracking-widest">© 2027 Eddie & Emily. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const targetDate = new Date("2027-01-16T17:00:00+08:00").getTime();
+        
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('timer-days').innerText = "00";
+                document.getElementById('timer-hours').innerText = "00";
+                document.getElementById('timer-mins').innerText = "00";
+                document.getElementById('timer-secs').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('timer-mins').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('timer-secs').innerText = String(seconds).padStart(2, '0');
+        }, 1000);
+
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.icon');
+                
+                if (content.classList.contains('open')) {
+                    content.classList.remove('open');
+                    icon.textContent = '+';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.classList.add('open');
+                    icon.textContent = '−';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        function toggleDynamicFields() {
+            const dinnerInput = document.getElementById('dinner_count');
+            const dynamicArea = document.getElementById('dynamic_fields');
+            const dietarySelect = document.getElementById('dietary_select');
+            const chairSelect = document.getElementById('chair_select');
+            
+            const count = parseInt(dinnerInput.value) || 0;
+
+            if (count > 0) {
+                dynamicArea.classList.remove('hidden');
+                dietarySelect.setAttribute('required', 'true');
+                chairSelect.setAttribute('required', 'true');
+            } else {
+                dynamicArea.classList.add('hidden');
+                dietarySelect.removeAttribute('required');
+                chairSelect.removeAttribute('required');
+                dietarySelect.value = "";
+                chairSelect.value = "";
+            }
+        }
+
+        function toggleAddressField() {
+            const inviteSelect = document.getElementById('paper_invite_select');
+            const addressField = document.getElementById('address_field');
+            const addressInput = document.getElementById('address_input');
+            
+            if (inviteSelect.value === '需要，請郵寄紙本喜帖') {
+                addressField.classList.remove('hidden');
+                addressInput.setAttribute('required', 'true');
+            } else {
+                addressField.classList.add('hidden');
+                addressInput.removeAttribute('required');
+                addressInput.value = "";
+            }
+        }
+
+        let submitted = false;
+
+        function showSuccessMessage() {
+            const modal = document.getElementById('success_modal');
+            const modalContent = document.getElementById('modal_content');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            
+            document.getElementById('rsvp_form').reset();
+            toggleDynamicFields();
+            toggleAddressField();
+            submitted = false;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('success_modal');
+            const modalContent = document.getElementById('modal_content');
+            
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
